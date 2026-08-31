@@ -76,17 +76,15 @@ export default function Landing() {
               ● PRE-LAUNCH — TRADING NOT YET LIVE
             </span>
             <h1>
-              Every trade
+              Hold $PENNY.
               <br />
-              feeds the basket.
-              <br />
-              <em>The basket pays you.</em>
+              <em>Earn penny stocks.</em>
             </h1>
             <p>
-              $PENNY takes a {feePct}% cut of its own trading volume and spends
-              it on five small-cap Stock Tokens. Hold {threshold}+ and pass the
-              one-time check — your share lands in your wallet every epoch,
-              automatically.
+              Every trade feeds the basket — a {feePct}% fee on $PENNY volume
+              buys Stock Tokens tracking five small-cap moonshots. Hold{" "}
+              {threshold}+ and pass the one-time check: your share lands in
+              your wallet every epoch, automatically.
             </p>
             <div className="ix-hero-cta">
               <a
@@ -183,6 +181,51 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ------------------------------------------------------------ narrative */}
+      <section className="ix-story">
+        <div className="ix-story-in">
+          <div className="ix-story-side">
+            <div className="ix-kicker">THE IDEA</div>
+            <h2>
+              Why penny stocks,
+              <br />
+              <em>of all things?</em>
+            </h2>
+          </div>
+          <div className="ix-story-body">
+            <p>
+              <strong>
+                Penny stocks are where retail goes hunting for 10x.
+              </strong>{" "}
+              Small caps with big theses — solar factories, nuclear
+              microreactors, defence drones. High risk, high volatility, and
+              usually locked behind a brokerage account, one order at a time.
+            </p>
+            <p>
+              <strong>Robinhood put them onchain.</strong> Robinhood Chain
+              issues Stock Tokens — tokenised instruments that track real
+              equities and trade 24/5 with onchain settlement. For the first
+              time, a smart contract can hold exposure to a basket of small-cap
+              stocks.
+            </p>
+            <p>
+              <strong>$PENNY turns that into a flywheel.</strong> Instead of
+              you picking one penny stock and praying, the token&apos;s own
+              trading volume drip-buys a diversified basket of five — and
+              distributes it to holders. More trading, more buying. The basket
+              rotates as theses play out and new small caps get tokenised.
+            </p>
+            <p className="ix-story-fine">
+              To be precise: Stock Tokens provide economic exposure to the
+              underlying equities — they are not brokerage shares, carry no
+              voting rights or dividends, and $PENNY itself is never redeemable
+              for the basket. Rewards are separate assets that become yours
+              only when distributed.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* -------------------------------------------------------------- stocks */}
       <section id="stocks" className="ix-stocks">
         <div className="ix-stocks-head">
@@ -229,6 +272,10 @@ export default function Landing() {
       {/* ---------------------------------------------------------------- how */}
       <section id="how" className="ix-how">
         <h2>How it works</h2>
+        <p className="ix-how-sub">
+          Three moving parts. Each one is a contract you can read, and every
+          hop between them is a public onchain event.
+        </p>
         <div className="ix-how-grid">
           <div className="ix-how-card">
             <div className="ix-how-n">01</div>
@@ -257,6 +304,75 @@ export default function Landing() {
               up, every epoch. No claiming. No gas. Opt out anytime.
             </p>
           </div>
+        </div>
+
+        {/* full lifecycle walk-through */}
+        <div className="ix-life">
+          <div className="ix-kicker">ONE EPOCH, START TO FINISH</div>
+          <div className="ix-life-rows">
+            <div className="ix-life-row">
+              <span className="ix-life-n">1</span>
+              <div>
+                <strong>Someone trades.</strong> A swap in the ETH/$PENNY pool
+                fires the fee hook: {feePct}% of the WETH leg goes straight to
+                the FeeCollector. Nothing is skimmed — the fee address is wired
+                once and can never be changed.
+              </div>
+            </div>
+            <div className="ix-life-row">
+              <span className="ix-life-n">2</span>
+              <div>
+                <strong>The keeper checks every 15 minutes.</strong> When
+                enough WETH has pooled and markets are open, it triggers the
+                basket purchase — five stocks, equal value, priced by
+                Chainlink. If even one leg can&apos;t execute safely, the whole
+                purchase waits. No partial baskets, ever.
+              </div>
+            </div>
+            <div className="ix-life-row">
+              <span className="ix-life-n">3</span>
+              <div>
+                <strong>Purchased tokens land in the vault.</strong> A
+                RewardVault no admin can sweep. From this moment the stocks are
+                spoken for — they can only ever leave toward entitled holders.
+              </div>
+            </div>
+            <div className="ix-life-row">
+              <span className="ix-life-n">4</span>
+              <div>
+                <strong>A snapshot decides who&apos;s in.</strong> The indexer
+                reads every wallet&apos;s balance at a finalized block. Hold{" "}
+                {threshold}+ $PENNY there and you&apos;re in the epoch,
+                pro-rata to your balance. Sell after the snapshot? That
+                epoch&apos;s entitlement is still yours.
+              </div>
+            </div>
+            <div className="ix-life-row">
+              <span className="ix-life-n">5</span>
+              <div>
+                <strong>The epoch publishes with a challenge window.</strong>{" "}
+                Entitlements go onchain as a Merkle root anyone can recompute
+                from public data. It activates only after a public delay — and
+                once you&apos;re owed something, no future epoch can reduce it.
+              </div>
+            </div>
+            <div className="ix-life-row">
+              <span className="ix-life-n">6</span>
+              <div>
+                <strong>Stocks arrive in your wallet.</strong> Opted-in wallets
+                get delivered automatically — the relayer pays gas, and the
+                math guarantees rewards can only land in the wallet that earned
+                them. Everyone else can self-claim all missed epochs in one
+                transaction, whenever.
+              </div>
+            </div>
+          </div>
+          <p className="ix-life-fine">
+            Purchases and epochs pause for market closure, stale prices, thin
+            liquidity, or emergencies — the system fails closed and resumes
+            where it left off. &quot;Every epoch&quot; means every epoch the
+            rails are safe, not a promised schedule.
+          </p>
         </div>
       </section>
 

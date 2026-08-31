@@ -931,3 +931,117 @@ footer.site {
     text-align: center;
   }
 }
+
+/* ------ narrative (why penny stocks) ------ */
+.ix-story {
+  background: var(--ix-card);
+  border-top: 1px solid var(--ix-line);
+  border-bottom: 1px solid var(--ix-line);
+}
+
+.ix-story-in {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 3.8rem 1rem;
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: 3rem;
+}
+
+.ix-story-side h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.15;
+  margin: 0.8rem 0 0;
+}
+
+.ix-story-side h2 em {
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  color: var(--ix-copper);
+}
+
+.ix-story-body p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ix-mut);
+  margin: 0 0 1.1rem;
+  max-width: 560px;
+}
+
+.ix-story-body strong {
+  color: var(--ix-ink);
+}
+
+.ix-story-fine {
+  font-size: 0.74rem !important;
+  border-left: 3px solid var(--ix-copper-2);
+  padding-left: 0.9rem;
+}
+
+/* ------ lifecycle walk-through ------ */
+.ix-how-sub {
+  font-size: 0.9rem;
+  color: var(--ix-mut);
+  max-width: 520px;
+  margin: -0.6rem 0 1.4rem;
+}
+
+.ix-life {
+  margin-top: 2.2rem;
+  background: var(--ix-card);
+  border: 1px solid var(--ix-line);
+  border-radius: 12px;
+  padding: 1.6rem 1.7rem 1.2rem;
+}
+
+.ix-life-rows {
+  margin-top: 1.2rem;
+}
+
+.ix-life-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed var(--ix-line);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ix-mut);
+}
+
+.ix-life-row:last-child {
+  border-bottom: none;
+}
+
+.ix-life-row strong {
+  color: var(--ix-ink);
+}
+
+.ix-life-n {
+  flex: 0 0 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--ix-copper-2), var(--ix-copper) 75%);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.15rem;
+}
+
+.ix-life-fine {
+  font-size: 0.72rem;
+  color: var(--ix-mut);
+  border-top: 1px solid var(--ix-line);
+  padding-top: 0.9rem;
+  margin: 0.4rem 0 0;
+}
+
+@media (max-width: 860px) {
+  .ix-story-in {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
