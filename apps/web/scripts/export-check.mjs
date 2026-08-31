@@ -18,13 +18,26 @@ if (!fs.existsSync(indexFile)) {
 }
 
 const html = fs.readFileSync(indexFile, "utf8");
-if (!html.includes("Penny Stocks")) {
+if (!html.includes("Penny Protocol")) {
   console.error(
-    'export-check FAIL: out/index.html does not contain "Penny Stocks"',
+    'export-check FAIL: out/index.html does not contain "Penny Protocol"',
   );
   process.exit(1);
 }
 
+if (!html.includes("not redeemable")) {
+  console.error(
+    "export-check FAIL: landing lost the non-redeemable disclosure",
+  );
+  process.exit(1);
+}
+
+const statusFile = path.join(outDir, "status.html");
+if (!fs.existsSync(statusFile)) {
+  console.error(`export-check FAIL: ${statusFile} not found`);
+  process.exit(1);
+}
+
 console.log(
-  "export-check OK: out/index.html exists and contains 'Penny Stocks'",
+  "export-check OK: landing + status pages exported with required copy",
 );

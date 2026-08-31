@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Penny Stocks",
+  title: "Penny Protocol — one token, a rotating basket of small-cap moonshots",
   description:
-    "Claim status UI for PENNY Stock Token rewards. Sample data only — no wallets or signing keys are shipped by this interface.",
+    "$PENNY trades on Robinhood Chain. 3% of every trade buys Robinhood Stock Tokens across five small-cap themes; eligible holders receive rewards automatically. Pre-launch, open source, unaudited.",
 };
 
 export default function RootLayout({
