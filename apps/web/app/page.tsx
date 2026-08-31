@@ -10,32 +10,26 @@ import {
 const GITHUB_URL = "https://github.com/sarv6969/penny-protocol";
 
 const BASKET = [
-  {
-    ticker: "TE",
-    name: "T1 Energy",
-    theme: "U.S. solar manufacturing",
-  },
-  {
-    ticker: "POET",
-    name: "POET Technologies",
-    theme: "AI photonics & interconnects",
-  },
-  {
-    ticker: "NNE",
-    name: "NANO Nuclear Energy",
-    theme: "Microreactors & advanced nuclear",
-  },
-  {
-    ticker: "WYFI",
-    name: "WhiteFiber",
-    theme: "AI / HPC data centres",
-  },
-  {
-    ticker: "RCAT",
-    name: "Red Cat",
-    theme: "Defence drones",
-  },
+  { ticker: "TE", name: "T1 Energy", theme: "U.S. solar manufacturing" },
+  { ticker: "POET", name: "POET Technologies", theme: "AI photonics & interconnects" },
+  { ticker: "NNE", name: "NANO Nuclear Energy", theme: "Microreactors & advanced nuclear" },
+  { ticker: "WYFI", name: "WhiteFiber", theme: "AI / HPC data centres" },
+  { ticker: "RCAT", name: "Red Cat", theme: "Defence drones" },
 ] as const;
+
+// Clearly-labelled DEMO numbers for the hero dashboard card (no live protocol yet).
+const DEMO = {
+  distributed: "$0.00",
+  feesCollected: "0.00 ETH",
+  wallets: "—",
+  rows: [
+    { t: "TE", d: "+0.00" },
+    { t: "POET", d: "+0.00" },
+    { t: "NNE", d: "+0.00" },
+    { t: "WYFI", d: "+0.00" },
+    { t: "RCAT", d: "+0.00" },
+  ],
+};
 
 function fmt(n: bigint): string {
   return (n / 10n ** BigInt(PENNY_DECIMALS))
@@ -49,260 +43,290 @@ export default function Landing() {
   const feePct = (PROTOCOL_FEE_BPS / 100).toFixed(0);
 
   return (
-    <main className="landing">
+    <main className="ix">
       {/* ---------------------------------------------------------------- nav */}
-      <nav className="nav">
-        <div className="nav-inner">
-          <span className="brand">
-            <span className="brand-mark">P</span> Penny&nbsp;Protocol
+      <nav className="ix-nav">
+        <div className="ix-nav-in">
+          <span className="ix-brand">
+            <span className="ix-brand-sq" /> PENNY&nbsp;STOCKS
           </span>
-          <div className="nav-links">
-            <a href="#how">How it works</a>
-            <a href="#basket">Basket</a>
-            <a href="#transparency">Transparency</a>
-            <Link href="/status">Status</Link>
-            <a
-              className="btn btn-ghost"
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub ↗
+          <div className="ix-nav-links">
+            <a href="#how">HOW IT WORKS</a>
+            <a href="#stocks">BASKET</a>
+            <a href="#distributions">DISTRIBUTIONS</a>
+            <Link href="/status">STATUS</Link>
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+              DOCS
             </a>
           </div>
+          <a
+            className="ix-connect"
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GITHUB
+          </a>
         </div>
       </nav>
 
       {/* --------------------------------------------------------------- hero */}
-      <section className="hero">
-        <span className="pill">
-          <span className="pill-dot" /> Pre-launch — trading not yet live
-        </span>
-        <h1>
-          One token.
-          <br />
-          <span className="grad">A rotating basket of small-cap moonshots.</span>
-        </h1>
-        <p className="lede">
-          ${"PENNY"} trades against ETH on Robinhood Chain. {feePct}% of every
-          trade buys Robinhood Stock Tokens across five small-cap themes — and
-          eligible holders receive their pro-rata share automatically, every
-          epoch. No claiming. No gas.
-        </p>
-        <div className="cta-row">
-          <a
-            className="btn btn-primary"
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read the code on GitHub
-          </a>
-          <a className="btn btn-secondary" href="#how">
-            How it works
-          </a>
-        </div>
-        <p className="hero-fine">
-          PENNY is not redeemable for the basket and is not ownership of any
-          stock. Stock Tokens are separate rewards providing economic exposure
-          only. Availability restricted by jurisdiction.
-        </p>
-      </section>
-
-      {/* -------------------------------------------------------- key numbers */}
-      <section className="numbers">
-        <div className="num">
-          <div className="num-v">{supply}</div>
-          <div className="num-l">Fixed supply — no mint, no tax</div>
-        </div>
-        <div className="num">
-          <div className="num-v">{feePct}%</div>
-          <div className="num-l">Protocol fee, 100% buys the basket</div>
-        </div>
-        <div className="num">
-          <div className="num-v">{BASKET_TICKERS.length}</div>
-          <div className="num-l">Founding constituents, equal weight</div>
-        </div>
-        <div className="num">
-          <div className="num-v">{threshold}</div>
-          <div className="num-l">PENNY held = reward eligibility</div>
-        </div>
-      </section>
-
-      {/* --------------------------------------------------------- how it works */}
-      <section id="how" className="block">
-        <h2>How it works</h2>
-        <div className="cards3">
-          <div className="hcard">
-            <div className="hcard-n">1</div>
-            <h3>Trade</h3>
+      <section className="ix-hero">
+        <div className="ix-hero-in">
+          <div className="ix-hero-copy">
+            <h1>
+              Hold $PENNY.
+              <br />
+              Earn stock rewards.
+            </h1>
             <p>
-              Swap ETH ↔ PENNY in a dedicated Uniswap v4 pool on Robinhood
-              Chain. A custom hook collects a transparent {feePct}% fee in WETH
-              on every swap — both directions, immutable, capped in code.
+              A {feePct}% WETH fee on trades funds Stock&nbsp;Token
+              distributions to eligible holders — delivered automatically,
+              every epoch.
             </p>
-          </div>
-          <div className="hcard">
-            <div className="hcard-n">2</div>
-            <h3>Accumulate</h3>
-            <p>
-              Collected fees periodically buy five Robinhood Stock Tokens at
-              equal value, guarded by Chainlink price checks and fail-closed
-              market-session rules. All purchases are onchain and auditable.
-            </p>
-          </div>
-          <div className="hcard">
-            <div className="hcard-n">3</div>
-            <h3>Receive</h3>
-            <p>
-              Hold {threshold}+ PENNY at the snapshot, pass the one-time
-              eligibility check, opt in with a single signature — and Stock
-              Token rewards arrive in your wallet automatically each epoch.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------- basket */}
-      <section id="basket" className="block">
-        <h2>The founding basket</h2>
-        <p className="block-sub">
-          Five small-cap themes, 20% target weight each. The basket rotates:
-          constituents can be added or removed through a public 7-day timelock
-          with onchain reasons — but rewards already earned never change.
-        </p>
-        <div className="basket-grid">
-          {BASKET.map((b) => (
-            <div className="bcard" key={b.ticker}>
-              <div className="bcard-top">
-                <span className="bcard-ticker">{b.ticker}</span>
-                <span className="bcard-weight">20%</span>
-              </div>
-              <div className="bcard-name">{b.name}</div>
-              <div className="bcard-theme">{b.theme}</div>
+            <div className="ix-hero-cta">
+              <a
+                className="ix-btn ix-btn-dark"
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                READ THE CODE&nbsp;→
+              </a>
+              <a className="ix-btn ix-btn-lite" href="#how">
+                HOW IT WORKS
+              </a>
             </div>
-          ))}
+            <span className="ix-hero-pill">
+              PRE-LAUNCH — TRADING NOT YET LIVE
+            </span>
+          </div>
+
+          {/* floating dashboard card */}
+          <div className="ix-card">
+            <div className="ix-card-head">
+              <span className="ix-brand-sq dark" /> PENNY STOCKS
+              <span className="ix-demo">DEMO</span>
+            </div>
+            <div className="ix-card-big">
+              <div className="ix-lab">TOTAL VALUE DISTRIBUTED</div>
+              <div className="ix-big">{DEMO.distributed}</div>
+            </div>
+            <div className="ix-card-duo">
+              <div>
+                <div className="ix-lab">FEES COLLECTED</div>
+                <div className="ix-mid">{DEMO.feesCollected}</div>
+              </div>
+              <div>
+                <div className="ix-lab">ELIGIBLE WALLETS</div>
+                <div className="ix-mid">{DEMO.wallets}</div>
+              </div>
+            </div>
+            <div className="ix-card-dist">
+              <div className="ix-lab">FIRST DISTRIBUTION — AFTER LAUNCH</div>
+              <div className="ix-dist-rows">
+                {DEMO.rows.map((r) => (
+                  <span className="ix-chip" key={r.t}>
+                    <b>{r.t}</b> {r.d}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="ix-card-note">
+              Sample layout with zeroed values. Live contract reads replace
+              this at launch.
+            </div>
+          </div>
         </div>
-        <p className="fine">
-          Selection snapshot dated 30 Aug 2026; themes shown are the admission
-          thesis, not price predictions. Robinhood Stock Tokens are tokenised
-          instruments issued by Robinhood Assets (Jersey) Ltd — they provide
-          economic exposure and are not shares.
-        </p>
       </section>
 
-      {/* -------------------------------------------------------- transparency */}
-      <section id="transparency" className="block">
-        <h2>Built to be checked, not trusted</h2>
-        <div className="cards2">
-          <div className="tcard">
-            <h3>No admin games</h3>
-            <p>
-              Fixed 1B supply minted once. No mint function, no transfer tax,
-              no blacklist, no pause on transfers. The fee is immutable at{" "}
-              {feePct}% and every custody route is wired once and can never be
-              redirected — even by the owners.
-            </p>
+      {/* ------------------------------------------------------------ metrics */}
+      <section className="ix-metrics">
+        <div className="ix-kicker">/ LOCKED PARAMETERS /</div>
+        <h2>
+          Protocol parameters.
+          <br />
+          Fixed in code, verified in the repo.
+        </h2>
+        <div className="ix-metric-row">
+          <div className="ix-metric">
+            <div className="ix-metric-v">{feePct}%</div>
+            <div className="ix-metric-l">FEE ON TRADES</div>
+            <p>Immutable WETH fee, both directions. 100% buys the basket.</p>
           </div>
-          <div className="tcard">
-            <h3>Rewards can&apos;t be taken back</h3>
-            <p>
-              Purchased Stock Tokens sit in a vault no admin can sweep. Reward
-              roots activate only after a public challenge window, cumulative
-              entitlements can never decrease, and completed claims can never
-              be clawed back.
-            </p>
+          <div className="ix-metric">
+            <div className="ix-metric-v">{supply.split(",")[0]}B</div>
+            <div className="ix-metric-l">FIXED SUPPLY</div>
+            <p>Minted once. No mint function, no tax, no blacklist.</p>
           </div>
-          <div className="tcard">
-            <h3>Everything onchain</h3>
-            <p>
-              Every fee, purchase, deposit, root, and delivery emits a public
-              event. Reward manifests are bit-for-bit reproducible from public
-              data. The entire codebase — contracts, indexer, keeper — is open
-              source.
-            </p>
+          <div className="ix-metric">
+            <div className="ix-metric-v">{threshold}</div>
+            <div className="ix-metric-l">$PENNY THRESHOLD</div>
+            <p>Held at snapshot = eligible for pro-rata distributions.</p>
           </div>
-          <div className="tcard">
-            <h3>Honest about status</h3>
-            <p>
-              Not yet audited. Not yet approved by counsel. Trading is not
-              live. Mainnet deployment is blocked in code until independent
-              audit, legal signoff, and live liquidity verification complete —
-              those gates are published in the repo.
-            </p>
+          <div className="ix-metric">
+            <div className="ix-metric-v">{BASKET_TICKERS.length}</div>
+            <div className="ix-metric-l">CONSTITUENTS</div>
+            <p>Equal weight. Rotates via public 7-day timelock.</p>
           </div>
         </div>
-        <div className="cta-row center">
-          <a
-            className="btn btn-primary"
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Verify it yourself — GitHub ↗
-          </a>
-          <Link className="btn btn-secondary" href="/status">
-            Protocol status
+        <div className="ix-center">
+          <Link className="ix-btn ix-btn-lite" href="/status">
+            VIEW PROTOCOL STATUS&nbsp;→
           </Link>
         </div>
       </section>
 
-      {/* ---------------------------------------------------------------- faq */}
-      <section className="block">
-        <h2>Straight answers</h2>
-        <div className="faq">
-          <details>
-            <summary>Do I own the stocks?</summary>
+      {/* -------------------------------------------------------------- stocks */}
+      <section id="stocks" className="ix-stocks">
+        <div className="ix-stocks-head">
+          <h2>Supported stocks</h2>
+          <p className="ix-right-note">
+            Treasury WETH buys each supported Stock Token in equal parts.
+            Prices come from official Chainlink feeds at execution.
+          </p>
+        </div>
+        <div className="ix-stock-grid">
+          {BASKET.map((b) => (
+            <div className="ix-stock" key={b.ticker}>
+              <div className="ix-stock-top">
+                <span className="ix-stock-logo">{b.ticker.slice(0, 2)}</span>
+                <div>
+                  <div className="ix-stock-ticker">{b.ticker}</div>
+                  <div className="ix-stock-name">{b.name}</div>
+                </div>
+              </div>
+              <div className="ix-stock-foot">
+                <div>
+                  <div className="ix-lab">THEME</div>
+                  <div className="ix-stock-theme">{b.theme}</div>
+                </div>
+                <span className="ix-stock-w">20%</span>
+              </div>
+            </div>
+          ))}
+          <div className="ix-stock ix-stock-more">
+            <div className="ix-lab">BASKET ROTATION</div>
+            <div className="ix-stock-more-t">Constituents rotate</div>
             <p>
-              No. PENNY is not redeemable for the basket and does not represent
-              ownership of Stock Tokens or underlying shares. Stock Tokens you
-              receive as rewards are separate assets providing economic
-              exposure, and they are yours once delivered.
+              Stocks join or leave through a public 7-day timelock with onchain
+              reasons — rewards already earned never change.
             </p>
-          </details>
-          <details>
-            <summary>Is this guaranteed income?</summary>
-            <p>
-              No. Rewards depend entirely on trading volume, and purchases
-              pause during market closure, oracle issues, low fee accumulation,
-              or emergencies. Nothing here is a promise of returns.
-            </p>
-          </details>
-          <details>
-            <summary>Why the eligibility check?</summary>
-            <p>
-              Stock Tokens are restricted securities — they cannot be delivered
-              to U.S. persons and several other jurisdictions. The one-time
-              eligibility attestation is what makes automatic delivery legally
-              possible at all.
-            </p>
-          </details>
-          <details>
-            <summary>When does trading go live?</summary>
-            <p>
-              After the launch gates close: independent smart-contract audit,
-              legal counsel signoff, and verified live liquidity for all five
-              Stock Tokens. Progress is public in the repo&apos;s STATUS.md.
-            </p>
-          </details>
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+              VIEW POLICY →
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ------------------------------------------------------------- footer */}
-      <footer className="lfooter">
+      {/* ---------------------------------------------------------------- how */}
+      <section id="how" className="ix-how">
+        <h2>How it works</h2>
+        <div className="ix-how-grid">
+          <div className="ix-how-card">
+            <div className="ix-how-n">01</div>
+            <h3>Trade</h3>
+            <p>
+              Swap ETH ↔ $PENNY in a dedicated Uniswap v4 pool on Robinhood
+              Chain. The {feePct}% fee is collected in WETH by an immutable
+              hook — both directions, capped in code.
+            </p>
+          </div>
+          <div className="ix-how-card">
+            <div className="ix-how-n">02</div>
+            <h3>Accumulate</h3>
+            <p>
+              Collected fees buy the five Stock Tokens in equal parts, guarded
+              by Chainlink prices and fail-closed market-session rules. Every
+              purchase is onchain.
+            </p>
+          </div>
+          <div className="ix-how-card">
+            <div className="ix-how-n">03</div>
+            <h3>Get paid</h3>
+            <p>
+              Hold {threshold}+ $PENNY at the snapshot, pass the one-time
+              eligibility check, opt in with one signature — rewards arrive in
+              your wallet every epoch. No claiming. No gas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------- distributions */}
+      <section id="distributions" className="ix-dists">
+        <div className="ix-dists-head">
+          <h2>Recent distributions</h2>
+          <span className="ix-demo">NONE YET — PRE-LAUNCH</span>
+        </div>
+        <div className="ix-table">
+          <div className="ix-tr ix-th">
+            <span>TIME</span>
+            <span>STOCKS DISTRIBUTED</span>
+            <span>WALLETS</span>
+            <span>TX</span>
+          </div>
+          <div className="ix-empty">
+            Distributions begin after launch. Every epoch will appear here with
+            its Merkle root, per-stock amounts, and Blockscout link —
+            reproducible from public data.
+          </div>
+        </div>
+        <div className="ix-trust-row">
+          <div className="ix-trust">
+            <h3>No admin games</h3>
+            <p>
+              Custody routes wire once and can never be redirected — even by
+              owners. The fee can never exceed {feePct}%.
+            </p>
+          </div>
+          <div className="ix-trust">
+            <h3>Rewards can&apos;t be taken back</h3>
+            <p>
+              Roots activate after a public challenge window; entitlements
+              never decrease; completed claims can&apos;t be clawed back.
+            </p>
+          </div>
+          <div className="ix-trust">
+            <h3>Honest about status</h3>
+            <p>
+              Unaudited. No legal signoff yet. Mainnet deploy is blocked in
+              code until audit, counsel, and liquidity gates close.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------- bottom */}
+      <section className="ix-bottom">
+        <span>Stock Token rewards for eligible $PENNY holders.</span>
+        <a
+          className="ix-btn ix-btn-dark"
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          READ THE CODE&nbsp;→
+        </a>
+      </section>
+
+      <footer className="ix-foot">
         <p>
-          © {new Date().getFullYear()} Penny Protocol ·{" "}
+          Informational only; not financial, legal, tax, or investment advice.
+          $PENNY is not redeemable for the basket and does not represent
+          ownership of Stock Tokens or underlying shares. Distributions are
+          tokenised instruments providing economic exposure — not brokerage
+          shares — and do not include voting rights or dividends. Rewards
+          depend on trading volume and can pause; nothing here promises
+          returns. Unavailable in restricted jurisdictions including the
+          United States. Project is pre-launch and unaudited.
+        </p>
+        <p>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub
           </a>{" "}
-          · <Link href="/status">Status</Link>
-        </p>
-        <p className="fine">
-          Nothing on this page is investment, legal, or tax advice. This
-          project is unaudited and pre-launch; contracts are not deployed to
-          mainnet. Cryptoassets are volatile and you can lose everything you
-          put in. Stock Token rewards are unavailable in restricted
-          jurisdictions including the United States.
+          · <Link href="/status">Status</Link> · ©{" "}
+          {new Date().getFullYear()} Penny Protocol
         </p>
       </footer>
     </main>
