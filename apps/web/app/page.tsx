@@ -9,11 +9,21 @@ import {
 
 const GITHUB_URL = "https://github.com/sarv6969/penny-protocol";
 
+// Snapshot data dated 31 Aug 2026 market close (stockanalysis.com / S&P Global).
+// Screening notes only — the protocol's oracles are Chainlink feeds, never this table.
+const SNAPSHOT_DATE = "31 Aug 2026";
+
 const BASKET = [
   {
     ticker: "AUR",
     name: "Aurora Innovation",
     theme: "Autonomous trucking",
+    exchange: "NASDAQ",
+    price: "$5.63",
+    mcap: "$11.3B",
+    sector: "Physical AI / freight",
+    narrative:
+      "The leader in self-driving freight. Aurora Driver — a full hardware + software stack — is already hauling driverless loads on ten commercial routes across Texas, with second-generation trucks launched and a plan to scale past 200 driverless trucks. The thesis: trucking is a $900B U.S. market with a permanent driver shortage, and the first company to remove the driver at scale rewrites its economics.",
     stockUrl: "https://robinhood.com/us/en/stocks/AUR/",
     token: "0x373C06c4f7BDe527D7Dae4BA169E42b55E393CeD",
   },
@@ -21,6 +31,12 @@ const BASKET = [
     ticker: "JOBY",
     name: "Joby Aviation",
     theme: "Electric air taxis",
+    exchange: "NYSE",
+    price: "$6.83",
+    mcap: "$6.8B",
+    sector: "eVTOL / air mobility",
+    narrative:
+      "The furthest-along electric air taxi company: FAA certification in progress, Toyota as manufacturing partner, vertiport network deals in Florida, New York and Texas, and a $500M defence acquisition opening a second revenue engine. The thesis: if quiet electric aircraft replace helicopters for short urban hops, the first certified operator owns a new mode of transport.",
     stockUrl: "https://robinhood.com/us/en/stocks/JOBY/",
     token: "0xb334C5cE741B80B5B671F47F5C269Cb193fe8E24",
   },
@@ -28,6 +44,12 @@ const BASKET = [
     ticker: "SOUN",
     name: "SoundHound AI",
     theme: "Voice AI software",
+    exchange: "NASDAQ",
+    price: "$7.18",
+    mcap: "$3.2B",
+    sector: "Conversational AI",
+    narrative:
+      "Independent voice AI powering cars, drive-thrus, restaurants and call centres — revenue up 45% year-over-year to a record quarter, with the LivePerson acquisition adding enterprise customer-service scale. The thesis: every machine gets a voice interface, and businesses that won't hand their customer data to Big Tech need an independent provider.",
     stockUrl: "https://robinhood.com/us/en/stocks/SOUN/",
     token: "0x6E3Dfd9f7e1649BaA14D25cac18C94d62dB10A54",
   },
@@ -35,6 +57,12 @@ const BASKET = [
     ticker: "SMR",
     name: "NuScale Power",
     theme: "Small modular reactors",
+    exchange: "NYSE",
+    price: "$9.27",
+    mcap: "$4.0B",
+    sector: "Advanced nuclear",
+    narrative:
+      "The only small modular reactor design approved by the U.S. nuclear regulator, with $1.9B of liquidity and supplier agreements ready for first deployments. The thesis: AI data centres are creating a once-in-a-generation surge in clean baseload power demand, and factory-built reactors are the way nuclear finally scales.",
     stockUrl: "https://robinhood.com/us/en/stocks/SMR/",
     token: "0x1Eebee7F74517e0279dFb09d25B0407bEEc3FDd6",
   },
@@ -42,6 +70,12 @@ const BASKET = [
     ticker: "CLOV",
     name: "Clover Health",
     theme: "AI-driven health insurance",
+    exchange: "NASDAQ",
+    price: "$4.15",
+    mcap: "$2.2B",
+    sector: "Health tech",
+    narrative:
+      "A Medicare Advantage insurer built around Clover Assistant — AI software that helps physicians catch chronic disease earlier. Membership grew 48% year-over-year with GAAP profitability arriving and full-year guidance raised. The thesis: the only true value-based-care software play trading at small-cap prices, in America's fastest-growing insurance market.",
     stockUrl: "https://robinhood.com/us/en/stocks/CLOV/",
     token: "0x62200915e7DEab1eC7f79fb246daDbB80eACdDd0",
   },
@@ -266,23 +300,37 @@ export default function Landing() {
             point.
           </p>
         </div>
-        <div className="ix-stock-grid">
+        <div className="ix-stock-grid ix-stock-grid-wide">
           {BASKET.map((b) => (
             <div className="ix-stock" key={b.ticker}>
               <div className="ix-stock-top">
                 <span className="ix-stock-logo">{b.ticker.slice(0, 2)}</span>
                 <div>
-                  <div className="ix-stock-ticker">{b.ticker}</div>
+                  <div className="ix-stock-ticker">
+                    {b.ticker}{" "}
+                    <span className="ix-stock-exch">{b.exchange}</span>
+                  </div>
                   <div className="ix-stock-name">{b.name}</div>
-                </div>
-              </div>
-              <div className="ix-stock-foot">
-                <div>
-                  <div className="ix-lab">THEME</div>
-                  <div className="ix-stock-theme">{b.theme}</div>
                 </div>
                 <span className="ix-stock-w">20%</span>
               </div>
+              <div className="ix-stock-stats">
+                <div>
+                  <div className="ix-lab">PRICE*</div>
+                  <div className="ix-stock-stat">{b.price}</div>
+                </div>
+                <div>
+                  <div className="ix-lab">MARKET CAP*</div>
+                  <div className="ix-stock-stat">{b.mcap}</div>
+                </div>
+                <div>
+                  <div className="ix-lab">SECTOR</div>
+                  <div className="ix-stock-stat ix-stock-sector">
+                    {b.sector}
+                  </div>
+                </div>
+              </div>
+              <p className="ix-stock-story">{b.narrative}</p>
               <div className="ix-stock-links">
                 <a href={b.stockUrl} target="_blank" rel="noreferrer">
                   STOCK PAGE ↗
@@ -292,7 +340,7 @@ export default function Landing() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  TOKEN ↗
+                  TOKEN CONTRACT ↗
                 </a>
               </div>
             </div>
@@ -302,13 +350,24 @@ export default function Landing() {
             <div className="ix-stock-more-t">Constituents rotate</div>
             <p>
               Stocks join or leave through a public 7-day timelock with onchain
-              reasons — rewards already earned never change.
+              reasons — rewards already earned never change. As theses play out
+              and new small caps get tokenised, the shelf refreshes.
             </p>
             <a href={GITHUB_URL} target="_blank" rel="noreferrer">
               VIEW POLICY →
             </a>
           </div>
         </div>
+        <p className="fine">
+          *Prices and market caps are a dated screening snapshot ({SNAPSHOT_DATE}{" "}
+          market close, S&amp;P Global via stockanalysis.com) — shown for
+          context, never used by the protocol, which prices purchases through
+          official Chainlink feeds at execution. Narratives are the admission
+          thesis, not price predictions; every company here is unprofitable
+          and highly volatile. Robinhood Stock Tokens are tokenised
+          instruments issued by Robinhood Assets (Jersey) Ltd — they provide
+          economic exposure and are not shares.
+        </p>
       </section>
 
       {/* ---------------------------------------------------------------- how */}

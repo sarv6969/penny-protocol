@@ -1065,3 +1065,48 @@ footer.site {
 .ix-stock-links a:hover {
   text-decoration: underline;
 }
+
+/* ------ detailed stock cards ------ */
+.ix-stock-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+}
+
+.ix-stock-exch {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ix-mut);
+  margin-left: 0.3rem;
+}
+
+.ix-stock-top .ix-stock-w {
+  margin-left: auto;
+}
+
+.ix-stock-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr;
+  gap: 0.6rem;
+  padding: 0.15rem 0 0.8rem;
+  border-bottom: 1px dashed var(--ix-line);
+}
+
+.ix-stock-stat {
+  font-weight: 750;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  margin-top: 0.1rem;
+}
+
+.ix-stock-sector {
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.ix-stock-story {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--ix-mut);
+  margin: 0.75rem 0 0;
+}
