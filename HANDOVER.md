@@ -9,7 +9,7 @@ State: feature-complete, all local suites green, **mainnet deployment intentiona
 $PENNY — a fixed-supply ERC-20 on **Robinhood Chain (chain ID 4663)** trading against WETH in a
 dedicated Uniswap v4 pool. A custom hook takes a 3% WETH fee on exact-input swaps (both
 directions). A keeper periodically spends accumulated WETH on a **rotating basket** of canonical
-Robinhood Stock Tokens (launch five: TE, POET, NNE, WYFI, RCAT — equal notional). Purchased
+Robinhood Stock Tokens (launch five: AUR, JOBY, SOUN, SMR, CLOV — equal notional, D035). Purchased
 Stock Tokens are distributed to eligible PENNY holders (≥100k at snapshot, jurisdiction-attested)
 through cumulative multi-token Merkle epochs. Holders who opt in get **auto-delivery** — a
 permissionless relayer pushes their rewards each epoch, no claiming (rewards can only land in the

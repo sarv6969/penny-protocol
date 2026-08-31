@@ -10,24 +10,54 @@ import {
 const GITHUB_URL = "https://github.com/sarv6969/penny-protocol";
 
 const BASKET = [
-  { ticker: "TE", name: "T1 Energy", theme: "U.S. solar manufacturing" },
-  { ticker: "POET", name: "POET Technologies", theme: "AI photonics & interconnects" },
-  { ticker: "NNE", name: "NANO Nuclear Energy", theme: "Microreactors & advanced nuclear" },
-  { ticker: "WYFI", name: "WhiteFiber", theme: "AI / HPC data centres" },
-  { ticker: "RCAT", name: "Red Cat", theme: "Defence drones" },
+  {
+    ticker: "AUR",
+    name: "Aurora Innovation",
+    theme: "Autonomous trucking",
+    stockUrl: "https://robinhood.com/us/en/stocks/AUR/",
+    token: "0x373C06c4f7BDe527D7Dae4BA169E42b55E393CeD",
+  },
+  {
+    ticker: "JOBY",
+    name: "Joby Aviation",
+    theme: "Electric air taxis",
+    stockUrl: "https://robinhood.com/us/en/stocks/JOBY/",
+    token: "0xb334C5cE741B80B5B671F47F5C269Cb193fe8E24",
+  },
+  {
+    ticker: "SOUN",
+    name: "SoundHound AI",
+    theme: "Voice AI software",
+    stockUrl: "https://robinhood.com/us/en/stocks/SOUN/",
+    token: "0x6E3Dfd9f7e1649BaA14D25cac18C94d62dB10A54",
+  },
+  {
+    ticker: "SMR",
+    name: "NuScale Power",
+    theme: "Small modular reactors",
+    stockUrl: "https://robinhood.com/us/en/stocks/SMR/",
+    token: "0x1Eebee7F74517e0279dFb09d25B0407bEEc3FDd6",
+  },
+  {
+    ticker: "CLOV",
+    name: "Clover Health",
+    theme: "AI-driven health insurance",
+    stockUrl: "https://robinhood.com/us/en/stocks/CLOV/",
+    token: "0x62200915e7DEab1eC7f79fb246daDbB80eACdDd0",
+  },
 ] as const;
 
 // Clearly-labelled SAMPLE values for the hero receipt (no live protocol yet).
 const RECEIPT_ROWS = [
-  { t: "TE", n: "T1 ENERGY" },
-  { t: "POET", n: "POET TECHNOLOGIES" },
-  { t: "NNE", n: "NANO NUCLEAR" },
-  { t: "WYFI", n: "WHITEFIBER" },
-  { t: "RCAT", n: "RED CAT" },
+  { t: "AUR", n: "AURORA INNOVATION" },
+  { t: "JOBY", n: "JOBY AVIATION" },
+  { t: "SOUN", n: "SOUNDHOUND AI" },
+  { t: "SMR", n: "NUSCALE POWER" },
+  { t: "CLOV", n: "CLOVER HEALTH" },
 ];
 
 const TAPE =
-  "TE ▲ · POET ▲ · NNE ▲ · WYFI ▲ · RCAT ▲ · 3% FEE → BASKET · REWARDS EVERY EPOCH · ";
+  "AUR ▲ · JOBY ▲ · SOUN ▲ · SMR ▲ · CLOV ▲ · 3% FEE → BASKET · REWARDS EVERY EPOCH · ";
 
 function fmt(n: bigint): string {
   return (n / 10n ** BigInt(PENNY_DECIMALS))
@@ -197,8 +227,8 @@ export default function Landing() {
               <strong>
                 Penny stocks are where retail goes hunting for 10x.
               </strong>{" "}
-              Small caps with big theses — solar factories, nuclear
-              microreactors, defence drones. High risk, high volatility, and
+              Low-priced names with big theses — self-driving trucks, air
+              taxis, voice AI, modular nuclear. High risk, high volatility, and
               usually locked behind a brokerage account, one order at a time.
             </p>
             <p>
@@ -252,6 +282,18 @@ export default function Landing() {
                   <div className="ix-stock-theme">{b.theme}</div>
                 </div>
                 <span className="ix-stock-w">20%</span>
+              </div>
+              <div className="ix-stock-links">
+                <a href={b.stockUrl} target="_blank" rel="noreferrer">
+                  STOCK PAGE ↗
+                </a>
+                <a
+                  href={`https://robinhoodchain.blockscout.com/token/${b.token}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  TOKEN ↗
+                </a>
               </div>
             </div>
           ))}

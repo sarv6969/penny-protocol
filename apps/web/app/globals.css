@@ -1045,3 +1045,23 @@ footer.site {
     gap: 1.2rem;
   }
 }
+
+/* ------ stock card external links ------ */
+.ix-stock-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--ix-line);
+}
+
+.ix-stock-links a {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ix-copper);
+}
+
+.ix-stock-links a:hover {
+  text-decoration: underline;
+}

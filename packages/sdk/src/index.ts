@@ -11,6 +11,7 @@ export {
   CONSTITUENT_TARGET_WEIGHT_BPS,
   TEAM_VEST_DURATION_SECONDS,
   BASKET_TICKERS,
+  BASKET_TOKENS,
   type Constituent,
   type VerifiedManifestEntry,
   targetWeightBpsFor,

@@ -20,11 +20,11 @@ test("manifest contains all required launch entries", async () => {
     "uniswap.positionDescriptor",
     "uniswap.quoter",
     "uniswap.universalRouter",
-    "stock.TE",
-    "stock.POET",
-    "stock.NNE",
-    "stock.WYFI",
-    "stock.RCAT",
+    "stock.AUR",
+    "stock.JOBY",
+    "stock.SOUN",
+    "stock.SMR",
+    "stock.CLOV",
   ]) {
     requireEntry(manifest, key);
   }
@@ -35,12 +35,12 @@ test("blocked entries are present and do not pass verification gate", async () =
   const sequencer = requireEntry(manifest, "chainlink.sequencerUptime");
   assert.equal(sequencer.verification, "blocked");
   assert.throws(() => assertAllVerified(manifest, ["chainlink.sequencerUptime"]));
-  assert.throws(() => assertAllVerified(manifest, ["chainlink.stockFeed.TE"]));
+  assert.throws(() => assertAllVerified(manifest, ["chainlink.stockFeed.AUR"]));
 });
 
 test("founding basket has exactly five constituents, each verified onchain at pinned block", async () => {
   const manifest = await loadManifest();
-  const tickers = ["TE", "POET", "NNE", "WYFI", "RCAT"];
+  const tickers = ["AUR", "JOBY", "SOUN", "SMR", "CLOV"];
   for (const t of tickers) {
     const e = requireEntry(manifest, `stock.${t}`);
     assert.equal(e.verification, "onchain", `${t} must be onchain-verified`);

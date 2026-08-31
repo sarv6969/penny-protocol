@@ -109,6 +109,20 @@ contract tests + all TS suites green after the fixes; slither re-run clean of ne
   transfer of restricted Stock Tokens. Keeper `claim-relay` job is implemented and
   mainnet-gated behind `relayArmed` (same gate family as D009/D025).
 
+## 2026-09-01 — founding basket replaced (D035)
+
+- **D035 — Founding basket is now AUR / JOBY / SOUN / SMR / CLOV (revises the D011 launch
+  list).** Owner decision pre-launch (nothing was ever deployed against the old list, so this
+  is a config change, not a rotation event). New screen: low price band, real daily dollar
+  volume, tight spreads, ACTIVE not halted, one-per-sector frontier diversity — autonomous
+  trucking (AUR), electric air taxis (JOBY), voice AI (SOUN), small modular reactors (SMR),
+  AI health insurance (CLOV). All five canonical Robinhood Stock Tokens verified onchain at
+  pinned block **51123566** (bytecode 283B proxies, symbol match, 18 decimals,
+  `uiMultiplier()==1e18`, `oraclePaused()==false`, name `'{Company} • Robinhood Token'`).
+  Chainlink per-stock feed proxies remain BLOCKED (resolve before arming, as before). Old
+  TE/POET/NNE/WYFI/RCAT entries retired from the manifest. Contracts unchanged — the basket
+  list is constructor/config input, which is exactly why it lives in the manifest.
+
 ## Blocker-adjacent decisions (may be revisited)
 
 - **D018 — AI-assisted build is in progress but is NOT an audit.** Reports from tooling do not replace the external audit gate. "Audited" wording is never used in docs/UI until a named audit report is linked.

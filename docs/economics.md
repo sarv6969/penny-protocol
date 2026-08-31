@@ -28,7 +28,7 @@ Locked defaults. Typed deployment config must be pushed from `packages/config`; 
 
 ## Launch basket (equal weight, 20% each)
 
-TE · POET · NNE · WYFI · RCAT — see verified manifest for addresses. Dated snapshot values (e.g. "TE ~$4.80") are screening notes, NOT oracles; contracts know nothing of them.
+AUR · JOBY · SOUN · SMR · CLOV — see verified manifest for addresses (D035, verified onchain at block 51123566). Dated snapshot values (e.g. "AUR ~$5.50") are screening notes, NOT oracles; contracts know nothing of them.
 
 ## Reward epochs
 
