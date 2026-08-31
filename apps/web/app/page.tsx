@@ -17,19 +17,17 @@ const BASKET = [
   { ticker: "RCAT", name: "Red Cat", theme: "Defence drones" },
 ] as const;
 
-// Clearly-labelled DEMO numbers for the hero dashboard card (no live protocol yet).
-const DEMO = {
-  distributed: "$0.00",
-  feesCollected: "0.00 ETH",
-  wallets: "—",
-  rows: [
-    { t: "TE", d: "+0.00" },
-    { t: "POET", d: "+0.00" },
-    { t: "NNE", d: "+0.00" },
-    { t: "WYFI", d: "+0.00" },
-    { t: "RCAT", d: "+0.00" },
-  ],
-};
+// Clearly-labelled SAMPLE values for the hero receipt (no live protocol yet).
+const RECEIPT_ROWS = [
+  { t: "TE", n: "T1 ENERGY" },
+  { t: "POET", n: "POET TECHNOLOGIES" },
+  { t: "NNE", n: "NANO NUCLEAR" },
+  { t: "WYFI", n: "WHITEFIBER" },
+  { t: "RCAT", n: "RED CAT" },
+];
+
+const TAPE =
+  "TE ▲ · POET ▲ · NNE ▲ · WYFI ▲ · RCAT ▲ · 3% FEE → BASKET · REWARDS EVERY EPOCH · ";
 
 function fmt(n: bigint): string {
   return (n / 10n ** BigInt(PENNY_DECIMALS))
@@ -74,15 +72,21 @@ export default function Landing() {
       <section className="ix-hero">
         <div className="ix-hero-in">
           <div className="ix-hero-copy">
+            <span className="ix-hero-pill">
+              ● PRE-LAUNCH — TRADING NOT YET LIVE
+            </span>
             <h1>
-              Hold $PENNY.
+              Every trade
               <br />
-              Earn stock rewards.
+              feeds the basket.
+              <br />
+              <em>The basket pays you.</em>
             </h1>
             <p>
-              A {feePct}% WETH fee on trades funds Stock&nbsp;Token
-              distributions to eligible holders — delivered automatically,
-              every epoch.
+              $PENNY takes a {feePct}% cut of its own trading volume and spends
+              it on five small-cap Stock Tokens. Hold {threshold}+ and pass the
+              one-time check — your share lands in your wallet every epoch,
+              automatically.
             </p>
             <div className="ix-hero-cta">
               <a
@@ -97,56 +101,58 @@ export default function Landing() {
                 HOW IT WORKS
               </a>
             </div>
-            <span className="ix-hero-pill">
-              PRE-LAUNCH — TRADING NOT YET LIVE
-            </span>
           </div>
 
-          {/* floating dashboard card */}
-          <div className="ix-card">
-            <div className="ix-card-head">
-              <span className="ix-brand-sq dark" /> PENNY STOCKS
-              <span className="ix-demo">DEMO</span>
+          {/* trade-receipt card */}
+          <div className="ix-receipt">
+            <div className="ix-receipt-head">
+              <span>PENNY PROTOCOL</span>
+              <span className="ix-demo">SAMPLE</span>
             </div>
-            <div className="ix-card-big">
-              <div className="ix-lab">TOTAL VALUE DISTRIBUTED</div>
-              <div className="ix-big">{DEMO.distributed}</div>
+            <div className="ix-receipt-title">— BASKET PURCHASE ORDER —</div>
+            <div className="ix-receipt-meta">
+              EPOCH #001 · ROBINHOOD CHAIN · AFTER LAUNCH
             </div>
-            <div className="ix-card-duo">
-              <div>
-                <div className="ix-lab">FEES COLLECTED</div>
-                <div className="ix-mid">{DEMO.feesCollected}</div>
-              </div>
-              <div>
-                <div className="ix-lab">ELIGIBLE WALLETS</div>
-                <div className="ix-mid">{DEMO.wallets}</div>
-              </div>
+            <div className="ix-receipt-rows">
+              {RECEIPT_ROWS.map((r) => (
+                <div className="ix-receipt-row" key={r.t}>
+                  <span className="ix-receipt-tick">{r.t}</span>
+                  <span className="ix-receipt-dots" />
+                  <span className="ix-receipt-name">{r.n}</span>
+                  <span className="ix-receipt-w">20%</span>
+                </div>
+              ))}
             </div>
-            <div className="ix-card-dist">
-              <div className="ix-lab">FIRST DISTRIBUTION — AFTER LAUNCH</div>
-              <div className="ix-dist-rows">
-                {DEMO.rows.map((r) => (
-                  <span className="ix-chip" key={r.t}>
-                    <b>{r.t}</b> {r.d}
-                  </span>
-                ))}
-              </div>
+            <div className="ix-receipt-total">
+              <span>FEE POOL DEPLOYED</span>
+              <span>100%</span>
             </div>
-            <div className="ix-card-note">
-              Sample layout with zeroed values. Live contract reads replace
-              this at launch.
+            <div className="ix-receipt-barcode" aria-hidden>
+              ║█║▌║█▌║║█║▌█║║▌║█║█▌║║▌█║
             </div>
+            <div className="ix-receipt-note">
+              SAMPLE RECEIPT — VALUES APPEAR AT LAUNCH. NOT REDEEMABLE. NOT
+              SHARES.
+            </div>
+          </div>
+        </div>
+
+        {/* ticker tape */}
+        <div className="ix-tape" aria-hidden>
+          <div className="ix-tape-inner">
+            <span>{TAPE.repeat(4)}</span>
+            <span>{TAPE.repeat(4)}</span>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------ metrics */}
       <section className="ix-metrics">
-        <div className="ix-kicker">/ LOCKED PARAMETERS /</div>
+        <div className="ix-kicker">CARVED IN BYTECODE</div>
         <h2>
-          Protocol parameters.
+          Four numbers.
           <br />
-          Fixed in code, verified in the repo.
+          Nobody can change them — not even us.
         </h2>
         <div className="ix-metric-row">
           <div className="ix-metric">
@@ -180,10 +186,11 @@ export default function Landing() {
       {/* -------------------------------------------------------------- stocks */}
       <section id="stocks" className="ix-stocks">
         <div className="ix-stocks-head">
-          <h2>Supported stocks</h2>
+          <h2>The moonshot shelf</h2>
           <p className="ix-right-note">
-            Treasury WETH buys each supported Stock Token in equal parts.
-            Prices come from official Chainlink feeds at execution.
+            Fee WETH buys every constituent in equal parts, priced by official
+            Chainlink feeds at execution. Small caps only — that&apos;s the
+            point.
           </p>
         </div>
         <div className="ix-stock-grid">
@@ -225,29 +232,29 @@ export default function Landing() {
         <div className="ix-how-grid">
           <div className="ix-how-card">
             <div className="ix-how-n">01</div>
-            <h3>Trade</h3>
+            <h3>Volume becomes fuel</h3>
             <p>
-              Swap ETH ↔ $PENNY in a dedicated Uniswap v4 pool on Robinhood
-              Chain. The {feePct}% fee is collected in WETH by an immutable
-              hook — both directions, capped in code.
+              Every ETH ↔ $PENNY swap on Robinhood Chain pays a {feePct}% WETH
+              fee into the treasury. The fee is enforced by an immutable
+              Uniswap v4 hook — both directions, capped in code, no override.
             </p>
           </div>
           <div className="ix-how-card">
             <div className="ix-how-n">02</div>
-            <h3>Accumulate</h3>
+            <h3>Fuel becomes stocks</h3>
             <p>
-              Collected fees buy the five Stock Tokens in equal parts, guarded
-              by Chainlink prices and fail-closed market-session rules. Every
-              purchase is onchain.
+              The treasury spends itself on the five Stock Tokens in equal
+              parts — Chainlink-priced, market-session-guarded, all-or-nothing.
+              Every purchase is a public onchain event.
             </p>
           </div>
           <div className="ix-how-card">
             <div className="ix-how-n">03</div>
-            <h3>Get paid</h3>
+            <h3>Stocks become yours</h3>
             <p>
               Hold {threshold}+ $PENNY at the snapshot, pass the one-time
-              eligibility check, opt in with one signature — rewards arrive in
-              your wallet every epoch. No claiming. No gas.
+              eligibility check, sign once to opt in — then rewards just show
+              up, every epoch. No claiming. No gas. Opt out anytime.
             </p>
           </div>
         </div>
@@ -299,7 +306,9 @@ export default function Landing() {
 
       {/* -------------------------------------------------------------- bottom */}
       <section className="ix-bottom">
-        <span>Stock Token rewards for eligible $PENNY holders.</span>
+        <span>
+          Don&apos;t trust the pitch. The whole machine is open source.
+        </span>
         <a
           className="ix-btn ix-btn-dark"
           href={GITHUB_URL}
