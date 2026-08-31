@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "chainId": 4663,
+  "epochIndex": 0,
+  "distributor": "0xdddddddddddddddddddddddddddddddddddddddd",
+  "root": "0x3fceda09eea9c335ba193a55a63184c14d803aadb600fef0d24c80876d722f72",
+  "assets": [
+    "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ],
+  "walletCount": 3,
+  "snapshot": {
+    "blockNumber": 5,
+    "blockHash": "0x0000000000000000000000000000000000000000000000000000000000000005"
+  },
+  "totalEligibleSupply": "800000000000000000000000",
+  "fundedTotals": {
+    "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": "1000000000000000000000",
+    "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb": "500000000000000000000"
+  },
+  "residual": {
+    "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": "0",
+    "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb": "0"
+  },
+  "walletProofs": [
+    {
+      "wallet": "0x1111111111111111111111111111111111111111",
+      "cumulative": [
+        "500000000000000000000",
+        "250000000000000000000"
+      ],
+      "proof": [
+        "0x6387a98245a3c9033a5686485981116e7e5bc1663549ae3eecf326b2eaf93a8a",
+        "0xf013957e98658ea3aaac9a8be6b1bcb58b98891f11d691f4d9ff2f3fb5dad64a"
+      ]
+    },
+    {
+      "wallet": "0x2222222222222222222222222222222222222222",
+      "cumulative": [
+        "312500000000000000000",
+        "156250000000000000000"
+      ],
+      "proof": [
+        "0xa5c322a9e897351326018df89eeb279fa261cdf88dc94cee27f9ce624c9cbb8f",
+        "0xf013957e98658ea3aaac9a8be6b1bcb58b98891f11d691f4d9ff2f3fb5dad64a"
+      ]
+    },
+    {
+      "wallet": "0x3333333333333333333333333333333333333333",
+      "cumulative": [
+        "187500000000000000000",
+        "93750000000000000000"
+      ],
+      "proof": [
+        "0x727f1495bc26989a173dd0b9b8b10fc823567782bd8b6555dcdfc28c78d9bb81",
+        "0xbbc192e9e034d4bc9320d52635d53ef2280097782f24bd9aeb5c7ab33cea8533"
+      ]
+    }
+  ],
+  "contentHash": "0xaf91de550c527c0de1088bc8937d8f39e5f54e1899dae1800bed863f41ad99a1"
+}

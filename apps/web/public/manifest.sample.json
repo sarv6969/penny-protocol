@@ -1,0 +1,64 @@
+{
+  "$schema": "sample-manifest",
+  "epochIndex": 7,
+  "root": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "snapshotBlock": 12345678,
+  "assets": [
+    {
+      "ticker": "TE",
+      "name": "Stock Token TE",
+      "decimals": 18,
+      "rewardPool": "100000000000000000000",
+      "placeholderAddress": "0x0000000000000000000000000000000000000001"
+    },
+    {
+      "ticker": "POET",
+      "name": "Stock Token POET",
+      "decimals": 18,
+      "rewardPool": "80000000000000000000",
+      "placeholderAddress": "0x0000000000000000000000000000000000000002"
+    },
+    {
+      "ticker": "NNE",
+      "name": "Stock Token NNE",
+      "decimals": 18,
+      "rewardPool": "120000000000000000000",
+      "placeholderAddress": "0x0000000000000000000000000000000000000003"
+    },
+    {
+      "ticker": "WYFI",
+      "name": "Stock Token WYFI",
+      "decimals": 18,
+      "rewardPool": "70000000000000000000",
+      "placeholderAddress": "0x0000000000000000000000000000000000000004"
+    },
+    {
+      "ticker": "RCAT",
+      "name": "Stock Token RCAT",
+      "decimals": 18,
+      "rewardPool": "90000000000000000000",
+      "placeholderAddress": "0x0000000000000000000000000000000000000005"
+    }
+  ],
+  "claims": [
+    {
+      "wallet": "0x1111111111111111111111111111111111111111",
+      "eligible": true,
+      "cumulative": {
+        "TE": "15000000000000000000",
+        "POET": "12000000000000000000",
+        "NNE": "18000000000000000000",
+        "WYFI": "10000000000000000000",
+        "RCAT": "9000000000000000000"
+      }
+    },
+    {
+      "wallet": "0x2222222222222222222222222222222222222222",
+      "eligible": false,
+      "note": "below 100k PENNY eligibility threshold at snapshot block"
+    }
+  ],
+  "generatedAt": "2026-08-31T00:00:00.000Z",
+  "contentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "note": "sample for UI; live manifests served by the indexer"
+}

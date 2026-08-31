@@ -1,0 +1,11 @@
+{
+  "name": "@penny/contracts",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "../../scripts/forge.sh build",
+    "lint": "../../scripts/forge.sh fmt --check",
+    "test": "../../scripts/forge.sh test",
+    "fmt": "../../scripts/forge.sh fmt"
+  }
+}

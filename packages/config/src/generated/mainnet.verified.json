@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-08-30T00:00:00Z",
+  "schemaVersion": "1.1.0",
+  "chainId": 4663,
+  "verifiedAtBlock": 49902198,
+  "notes": "Phase 1a completed 2026-08-30 via public mainnet RPC (rpc.mainnet.chain.robinhood.com), chainId 4663 (0x1237) confirmed. All addresses below confirmed DEPLOYED with bytecode at pinned block; Stock Tokens confirmed: symbol, 18 decimals, uiMultiplier()==1e18, oraclePaused()==false, name = '{Ticker} • Robinhood Token'. Sequencer uptime feed: BLOCKED (not documented by Robinhood or Chainlink). Chainlink per-stock feed proxies: BLOCKED (resolve proxies onchain before spend-path arming).",
+  "pinnedEvidence": {
+    "rpc": "https://rpc.mainnet.chain.robinhood.com",
+    "chainIdHex": "0x1237",
+    "eth_getCode": "non-zero runtime bytecode for every address in this manifest (WETH 2202B, Stock Tokens 283B proxies, PoolManager 24009B, PositionManager 23877B, UniversalRouter 24546B)",
+    "stockTokenChecks": "symbol/name/decimals/uiMultiplier()/oraclePaused() match for TE, POET, NNE, WYFI, RCAT"
+  },
+  "entries": {
+    "chain.mainnet": { "chainId": 4663, "name": "Robinhood Chain Mainnet", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "onchain", "verifiedAtBlock": 49902198 },
+    "chain.testnet": { "chainId": 46630, "name": "Robinhood Chain Testnet", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "docs-only" },
+    "rpc.mainnet": { "chainId": 4663, "name": "rpc.mainnet.chain.robinhood.com", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "onchain", "verifiedAtBlock": 49902198 },
+    "rpc.testnet": { "chainId": 46630, "name": "rpc.testnet.chain.robinhood.com", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "docs-only" },
+    "explorer.mainnet": { "chainId": 4663, "name": "robinhoodchain.blockscout.com", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "docs-only" },
+    "explorer.testnet": { "chainId": 46630, "name": "explorer.testnet.chain.robinhood.com", "sourceUrl": "https://docs.robinhood.com/chain/connecting/", "verification": "docs-only" },
+    "weth": { "chainId": 4663, "name": "WETH", "symbol": "WETH", "decimals": 18, "sourceUrl": "https://docs.robinhood.com/chain/contracts/", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 2202 },
+    "usdg": { "chainId": 4663, "name": "USDG", "symbol": "USDG", "decimals": 18, "sourceUrl": "https://docs.robinhood.com/chain/contracts/", "verification": "onchain", "verifiedAtBlock": 49902198 },
+    "uniswap.poolManager": { "chainId": 4663, "name": "Uniswap v4 PoolManager", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 24009 },
+    "uniswap.positionDescriptor": { "chainId": 4663, "name": "Uniswap v4 PositionDescriptor", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "docs-only" },
+    "uniswap.positionManager": { "chainId": 4663, "name": "Uniswap v4 PositionManager", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 23877 },
+    "uniswap.quoter": { "chainId": 4663, "name": "Uniswap v4 Quoter", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "docs-only" },
+    "uniswap.stateView": { "chainId": 4663, "name": "Uniswap v4 StateView", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "docs-only" },
+    "uniswap.reservesLens": { "chainId": 4663, "name": "Uniswap v4 ReservesLens", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "docs-only" },
+    "uniswap.universalRouter": { "chainId": 4663, "name": "Uniswap v4 Universal Router", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 24546 },
+    "permit2": { "chainId": 4663, "name": "Permit2", "sourceUrl": "https://developers.uniswap.org/docs/protocols/v4/deployments", "verification": "docs-only" },
+    "stock.TE": { "chainId": 4663, "name": "T1 Energy", "symbol": "TE", "decimals": 18, "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 283, "uiMultiplierVerified": "1000000000000000000", "oraclePausedVerified": "false", "onchainNameVerified": "T1 Energy • Robinhood Token" },
+    "stock.POET": { "chainId": 4663, "name": "POET Technologies", "symbol": "POET", "decimals": 18, "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 283, "uiMultiplierVerified": "1000000000000000000", "oraclePausedVerified": "false", "onchainNameVerified": "POET Technologies • Robinhood Token" },
+    "stock.NNE": { "chainId": 4663, "name": "NANO Nuclear Energy", "symbol": "NNE", "decimals": 18, "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 283, "uiMultiplierVerified": "1000000000000000000", "oraclePausedVerified": "false", "onchainNameVerified": "Nano Nuclear Energy • Robinhood Token" },
+    "stock.WYFI": { "chainId": 4663, "name": "WhiteFiber", "symbol": "WYFI", "decimals": 18, "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 283, "uiMultiplierVerified": "1000000000000000000", "oraclePausedVerified": "false", "onchainNameVerified": "WhiteFiber, Inc. • Robinhood Token" },
+    "stock.RCAT": { "chainId": 4663, "name": "Red Cat", "symbol": "RCAT", "decimals": 18, "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches", "verification": "onchain", "verifiedAtBlock": 49902198, "runtimeSizeBytes": 283, "uiMultiplierVerified": "1000000000000000000", "oraclePausedVerified": "false", "onchainNameVerified": "Red Cat • Robinhood Token" },
+    "chainlink.sequencerUptime": { "chainId": 4663, "name": "Chainlink L2 Sequencer Uptime Feed", "sourceUrl": "https://docs.robinhood.com/chain/oracles-and-price-feeds/", "verification": "blocked", "note": "Robinhood docs recommend checking sequencer uptime but publish no proxy address; Chainlink L2 sequencer feeds page does not list Robinhood Chain" },
+    "chainlink.stockFeed.TE": { "chainId": 4663, "name": "Chainlink TE equity feed", "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood", "verification": "blocked", "note": "resolve current official proxy onchain; do not hardcode guesses" },
+    "chainlink.stockFeed.POET": { "chainId": 4663, "name": "Chainlink POET equity feed", "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood", "verification": "blocked", "note": "resolve current official proxy onchain" },
+    "chainlink.stockFeed.NNE": { "chainId": 4663, "name": "Chainlink NNE equity feed", "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood", "verification": "blocked", "note": "resolve current official proxy onchain" },
+    "chainlink.stockFeed.WYFI": { "chainId": 4663, "name": "Chainlink WYFI equity feed", "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood", "verification": "blocked", "note": "resolve current official proxy onchain" },
+    "chainlink.stockFeed.RCAT": { "chainId": 4663, "name": "Chainlink RCAT equity feed", "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood", "verification": "blocked", "note": "resolve current official proxy onchain" }
+  }
+}
