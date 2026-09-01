@@ -44,6 +44,16 @@ export {
   type FundingLedger,
   type PurchaseOutcome,
 } from "./purchase.js";
+export {
+  collectQuotes,
+  HttpLifiClient,
+  type CollectedRoute,
+  type LifiClient,
+  type LifiQuote,
+  type OracleReader,
+  type QuoteGateResult,
+  type QuoteRequest,
+} from "./quotes.js";
 export { StubSigner, scopeOf } from "./signer.js";
 export type { EligibilitySigner } from "./signer.js";
 export {

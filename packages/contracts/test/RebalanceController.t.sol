@@ -242,9 +242,9 @@ contract RebalanceControllerTest is Test {
     }
 
     function test_ConstructorGateways() public {
-        // Founding size is parametrized 3..MAX (D037); below 3 must revert.
+        // Founding size is parametrized 1..MAX (D038); empty must revert.
         vm.expectRevert("REBAL: founding size");
-        new RebalanceController(new address[](2), verifier, DELAY);
+        new RebalanceController(new address[](0), verifier, DELAY);
 
         // A 4-element founding list is now legal but zero addresses still revert.
         vm.expectRevert("REBAL: zero founding");
