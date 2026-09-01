@@ -123,6 +123,28 @@ contract tests + all TS suites green after the fixes; slither re-run clean of ne
   TE/POET/NNE/WYFI/RCAT entries retired from the manifest. Contracts unchanged — the basket
   list is constructor/config input, which is exactly why it lives in the manifest.
 
+## 2026-09-01 — production oracle + venue rail (D036–D037)
+
+- **D036 — ChainlinkOracle is live-verified.** Official Robinhood equity feed proxies resolved
+  from Chainlink's reference directory and read onchain (block 51175803): IONQ/RGTI/RKLB/CLSK/
+  USAR + ETH/USD, all 8-dec, 24h heartbeat, 0.5% deviation. `ChainlinkOracle` (IOracleSource)
+  normalizes 8→18 dec, fails closed on staleness (4d stock bound spans weekends; 26h ETH),
+  unfinished rounds, feed reverts, and ERC-8056 `oraclePaused()`. Fork test reads REAL values
+  (ETH $2,473.44 / USAR $17.875) and executes the full rail. TRV pricing confirmed: feed bakes
+  in uiMultiplier — never multiply twice (D008).
+- **D037 — Venue rail = keeper-staged routes through whitelisted routers; trap pools measured
+  and excluded.** Exhaustive v4 scan (9,407 pools / 2.4M blocks): our five tokens have ONLY
+  90–99% fee trap pools + two mispriced pools (+25%/+142% vs oracle). Real Stock Token flow is
+  RFQ/propAMM per Robinhood docs. LiFi Diamond (verified official, 0xB477…4Af3) routes via
+  'nordstern' propAMM with executable quotes: USAR −0.23%, RKLB −8%, RGTI mispriced, IONQ/CLSK
+  unrouted. `RouteAdapter`: keeper stages (router, calldata, deadline) per token per cycle —
+  whitelisted routers only, one-shot routes, exact allowance granted+revoked, balance-delta
+  measured output, oracle-derived minOut enforced, unconsumed WETH returned. A bad route can
+  only revert, never steal. Uniswap remains a first-class route when a sane pool exists.
+  CANARY: founding count parametrized (3–8, immutable at construction); $PONEY canary = 3
+  routable stocks (USAR/RKLB/RGTI), production PENNY stays 5. Fork rehearsal green: 3-leg
+  equal-notional purchase ($24.73/leg), atomic rollback on missing route.
+
 ## Blocker-adjacent decisions (may be revisited)
 
 - **D018 — AI-assisted build is in progress but is NOT an audit.** Reports from tooling do not replace the external audit gate. "Audited" wording is never used in docs/UI until a named audit report is linked.

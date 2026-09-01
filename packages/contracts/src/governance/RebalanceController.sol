@@ -15,8 +15,11 @@ import {IRebalanceWeights} from "../basket/IRebalanceWeights.sol";
 ///         10,000 bps. It holds no funds.
 contract RebalanceController is AccessControl, IRebalanceWeights {
     uint8 public constant MAX_CONSTITUENTS = 8;
-    uint8 public constant MIN_CONSTITUENTS = 5;
-    uint8 public constant FOUNDING_COUNT = 5;
+    /// @notice Basket floor == founding size, fixed at construction (5 for production PENNY,
+    ///         smaller for explicitly-labelled canary deployments — D037). Immutable so
+    ///         governance can never shrink the floor after launch.
+    uint8 public immutable MIN_CONSTITUENTS;
+    uint8 public immutable FOUNDING_COUNT;
     uint16 public constant TARGET_TOTAL_BPS = 10_000;
     uint16 public constant FOUNDING_WEIGHT_BPS = 2_000;
 
@@ -48,7 +51,9 @@ contract RebalanceController is AccessControl, IRebalanceWeights {
     constructor(address[] memory founding, IStockTokenVerifier verifier_, uint256 timelockDelay_) {
         require(address(verifier_) != address(0), "REBAL: zero verifier");
         require(timelockDelay_ > 0, "REBAL: zero delay");
-        require(founding.length == FOUNDING_COUNT, "REBAL: need 5 founding");
+        require(founding.length >= 3 && founding.length <= MAX_CONSTITUENTS, "REBAL: founding size");
+        FOUNDING_COUNT = uint8(founding.length);
+        MIN_CONSTITUENTS = uint8(founding.length);
 
         verifier = verifier_;
         timelockDelay = timelockDelay_;

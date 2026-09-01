@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T00:00:00Z",
+  "generatedAt": "2026-09-01T12:00:00Z",
   "schemaVersion": "1.1.0",
   "chainId": 4663,
   "verifiedAtBlock": 49902198,
@@ -238,6 +238,146 @@
       "sourceUrl": "https://docs.chain.link/data-feeds/tokenized-equity-feeds/robinhood",
       "verification": "blocked",
       "note": "resolve current official proxy onchain; do not hardcode guesses"
+    },
+    "stock.IONQ": {
+      "chainId": 4663,
+      "symbol": "IONQ",
+      "decimals": 18,
+      "address": "0x558378E000D634A36593E338eBacdd6207640EfE",
+      "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "runtimeSizeBytes": 283,
+      "uiMultiplierVerified": "1000000000000000000",
+      "oraclePausedVerified": "false"
+    },
+    "chainlink.stockFeed.IONQ": {
+      "chainId": 4663,
+      "name": "Robinhood IONQ / USD",
+      "address": "0x22EfeC4919baf55F360E0EDee4AbEB26DE4971eb",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "live latestRoundData read verified in ForkBasketRail fork test"
+    },
+    "stock.RGTI": {
+      "chainId": 4663,
+      "symbol": "RGTI",
+      "decimals": 18,
+      "address": "0x284358abc07F9359f19f4b5b4aC91901Be2597Ba",
+      "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "runtimeSizeBytes": 283,
+      "uiMultiplierVerified": "1000000000000000000",
+      "oraclePausedVerified": "false"
+    },
+    "chainlink.stockFeed.RGTI": {
+      "chainId": 4663,
+      "name": "Robinhood RGTI / USD",
+      "address": "0x2A045cF1C49c61c166C036d2f06FA2D2d984f765",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "live latestRoundData read verified in ForkBasketRail fork test"
+    },
+    "stock.RKLB": {
+      "chainId": 4663,
+      "symbol": "RKLB",
+      "decimals": 18,
+      "address": "0x3b14C39E89D60D627b42a1A4CA45b5bb45Fc12e2",
+      "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "runtimeSizeBytes": 283,
+      "uiMultiplierVerified": "1000000000000000000",
+      "oraclePausedVerified": "false"
+    },
+    "chainlink.stockFeed.RKLB": {
+      "chainId": 4663,
+      "name": "Robinhood RKLB / USD",
+      "address": "0x045477BF65Aef6f4F2386ad0164579e48381CC74",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "live latestRoundData read verified in ForkBasketRail fork test"
+    },
+    "stock.CLSK": {
+      "chainId": 4663,
+      "symbol": "CLSK",
+      "decimals": 18,
+      "address": "0xcBB95BBF36099d34dA091dc6Fa6F49EfA257Cee3",
+      "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "runtimeSizeBytes": 283,
+      "uiMultiplierVerified": "1000000000000000000",
+      "oraclePausedVerified": "false"
+    },
+    "chainlink.stockFeed.CLSK": {
+      "chainId": 4663,
+      "name": "Robinhood CLSK / USD",
+      "address": "0x810c12D3a554Bc47fd39597Fe3b3AAC4941F50eF",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "live latestRoundData read verified in ForkBasketRail fork test"
+    },
+    "stock.USAR": {
+      "chainId": 4663,
+      "symbol": "USAR",
+      "decimals": 18,
+      "address": "0xd917B029C761D264c6A312BBbcDA868658eF86a6",
+      "sourceUrl": "https://docs.o1.exchange/launchpad/create/stock-paired-launches",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "runtimeSizeBytes": 283,
+      "uiMultiplierVerified": "1000000000000000000",
+      "oraclePausedVerified": "false"
+    },
+    "chainlink.stockFeed.USAR": {
+      "chainId": 4663,
+      "name": "Robinhood USAR / USD",
+      "address": "0xA994d3684e8400A6c8078226925779FdeE682DD9",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "live latestRoundData read verified in ForkBasketRail fork test"
+    },
+    "chainlink.ethUsd": {
+      "chainId": 4663,
+      "name": "ETH / USD",
+      "address": "0x78F3556b67E17Df817D51Ef5a990cDaF09E8d3A9",
+      "decimals": 8,
+      "heartbeatSeconds": 86400,
+      "deviationPct": 0.5,
+      "sourceUrl": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803
+    },
+    "lifi.diamond": {
+      "chainId": 4663,
+      "name": "LiFi Diamond router",
+      "address": "0xB477751B76CF82d00a686A1232f5fCD772414Af3",
+      "sourceUrl": "https://li.quest/v1/chains",
+      "verification": "onchain",
+      "verifiedAtBlock": 51175803,
+      "note": "official LiFi deployment for chain 4663; executable quotes verified for USAR (-0.23%), RKLB (-8%); IONQ/CLSK unrouted as of 2026-09-01"
     }
   }
 }
