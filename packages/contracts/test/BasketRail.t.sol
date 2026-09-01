@@ -4,6 +4,7 @@ pragma solidity 0.8.26;
 import {Test} from "forge-std/Test.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IWETH9} from "../src/interfaces/IWETH9.sol";
 import {MockERC20} from "./mocks/MockERC20.sol";
 import {MockStockToken} from "./mocks/MockStockToken.sol";
 import {MockOracle} from "./mocks/MockOracle.sol";
@@ -66,7 +67,7 @@ contract BasketRailTest is Test {
         buyer.setAdapter(adapter);
         buyer.setRewardVault(vault);
 
-        collector = new FeeCollector(address(this), IERC20(address(weth)));
+        collector = new FeeCollector(address(this), IWETH9(address(weth)));
         collector.setBasketBuyer(IBasketBuyer(address(buyer)));
         collector.setMinSweepAmount(0);
     }
@@ -194,6 +195,49 @@ contract BasketRailTest is Test {
         vm.expectRevert(abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, user));
         collector.setMinSweepAmount(1);
         vm.stopPrank();
+    }
+
+    // ------------------------------------------------------------------ manual fee ingress (D039)
+
+    function test_NativeEthDepositWrapsAndFundsBuyback() public {
+        // Operator forwards pons creator-tax proceeds as plain ETH.
+        vm.deal(user, AMOUNT * 2);
+        vm.prank(user);
+        (bool ok,) = address(collector).call{value: AMOUNT}("");
+        assertTrue(ok, "plain send must work");
+
+        assertEq(weth.balanceOf(address(collector)), AMOUNT, "ETH wrapped to WETH");
+        assertEq(collector.lifetimeEthReceived(), AMOUNT, "transparency counter");
+        assertEq(address(collector).balance, 0, "no unwrapped ETH left behind");
+
+        uint256 spent = collector.sweep();
+        assertEq(spent, AMOUNT, "forwarded fees bought the basket");
+        for (uint256 i = 0; i < 5; i++) {
+            assertEq(vault.holdings(address(tok[i])), AMOUNT / 5, "equal share");
+        }
+    }
+
+    function test_DepositFeesEntrypointEquivalentToPlainSend() public {
+        vm.deal(user, 1 ether);
+        vm.prank(user);
+        collector.depositFees{value: 0.4 ether}();
+        assertEq(weth.balanceOf(address(collector)), 0.4 ether);
+        assertEq(collector.lifetimeEthReceived(), 0.4 ether);
+    }
+
+    function test_ZeroValueDepositReverts() public {
+        vm.prank(user);
+        vm.expectRevert(FeeCollector.NothingToWrap.selector);
+        collector.depositFees{value: 0}();
+    }
+
+    function test_AnyoneMayDonateButNobodyMayWithdraw() public {
+        vm.deal(user, 1 ether);
+        vm.prank(user);
+        collector.depositFees{value: 0.5 ether}();
+        // No withdraw path exists on the collector — funds can only leave via sweep().
+        (bool found,) = address(collector).call(abi.encodeWithSignature("withdraw(uint256)", 1));
+        assertFalse(found, "collector must expose no withdraw");
     }
 
     // ------------------------------------------------------------------ OracleGuard

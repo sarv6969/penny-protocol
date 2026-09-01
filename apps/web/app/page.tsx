@@ -91,7 +91,7 @@ const RECEIPT_ROWS = [
 ];
 
 const TAPE =
-  "AUR ▲ · JOBY ▲ · SOUN ▲ · SMR ▲ · CLOV ▲ · 3% FEE → BASKET · REWARDS EVERY EPOCH · ";
+  "AUR ▲ · JOBY ▲ · SOUN ▲ · SMR ▲ · CLOV ▲ · 4% TAX → BASKET · REWARDS EVERY EPOCH · ";
 
 function fmt(n: bigint): string {
   return (n / 10n ** BigInt(PENNY_DECIMALS))
@@ -102,7 +102,7 @@ function fmt(n: bigint): string {
 export default function Landing() {
   const supply = fmt(PENNY_TOTAL_SUPPLY);
   const threshold = fmt(ELIGIBLE_BALANCE_THRESHOLD);
-  const feePct = (PROTOCOL_FEE_BPS / 100).toFixed(0);
+  const feePct = "4"; // pons v2 creator tax (traders pay 5% total; 4% is ours)
 
   return (
     <main className="ix">
@@ -140,13 +140,13 @@ export default function Landing() {
               ● PRE-LAUNCH — TRADING NOT YET LIVE
             </span>
             <h1>
-              Hold $PENNY.
+              Hold $PONES.
               <br />
               <em>Earn penny stocks.</em>
             </h1>
             <p>
-              Every trade feeds the basket — a {feePct}% fee on $PENNY volume
-              buys Stock Tokens tracking five small-cap moonshots. Hold{" "}
+              Every trade feeds the basket — a {feePct}% creator tax on $PONES
+              volume buys Stock Tokens tracking small-cap moonshots. Hold{" "}
               {threshold}+ and pass the one-time check: your share lands in
               your wallet every epoch, automatically.
             </p>
@@ -210,26 +210,32 @@ export default function Landing() {
 
       {/* ------------------------------------------------------------ metrics */}
       <section className="ix-metrics">
-        <div className="ix-kicker">CARVED IN BYTECODE</div>
+        <div className="ix-kicker">THE NUMBERS</div>
         <h2>
           Four numbers.
           <br />
-          Nobody can change them — not even us.
+          Set at launch, public forever.
         </h2>
         <div className="ix-metric-row">
           <div className="ix-metric">
             <div className="ix-metric-v">{feePct}%</div>
-            <div className="ix-metric-l">FEE ON TRADES</div>
-            <p>Immutable WETH fee, both directions. 100% buys the basket.</p>
+            <div className="ix-metric-l">CREATOR TAX</div>
+            <p>
+              Of the 5% traders pay on pons, 4% is ours — and 100% of it buys
+              the basket.
+            </p>
           </div>
           <div className="ix-metric">
             <div className="ix-metric-v">{supply.split(",")[0]}B</div>
             <div className="ix-metric-l">FIXED SUPPLY</div>
-            <p>Minted once. No mint function, no tax, no blacklist.</p>
+            <p>
+              Minted once to the pons curve. No team pre-allocation, no mint
+              function, liquidity permanently locked.
+            </p>
           </div>
           <div className="ix-metric">
             <div className="ix-metric-v">{threshold}</div>
-            <div className="ix-metric-l">$PENNY THRESHOLD</div>
+            <div className="ix-metric-l">$PONES THRESHOLD</div>
             <p>Held at snapshot = eligible for pro-rata distributions.</p>
           </div>
           <div className="ix-metric">
@@ -273,7 +279,7 @@ export default function Landing() {
               stocks.
             </p>
             <p>
-              <strong>$PENNY turns that into a flywheel.</strong> Instead of
+              <strong>$PONES turns that into a flywheel.</strong> Instead of
               you picking one penny stock and praying, the token&apos;s own
               trading volume drip-buys a diversified basket of five — and
               distributes it to holders. More trading, more buying. The basket
@@ -282,7 +288,7 @@ export default function Landing() {
             <p className="ix-story-fine">
               To be precise: Stock Tokens provide economic exposure to the
               underlying equities — they are not brokerage shares, carry no
-              voting rights or dividends, and $PENNY itself is never redeemable
+              voting rights or dividends, and $PONES itself is never redeemable
               for the basket. Rewards are separate assets that become yours
               only when distributed.
             </p>
@@ -382,9 +388,10 @@ export default function Landing() {
             <div className="ix-how-n">01</div>
             <h3>Volume becomes fuel</h3>
             <p>
-              Every ETH ↔ $PENNY swap on Robinhood Chain pays a {feePct}% WETH
-              fee into the treasury. The fee is enforced by an immutable
-              Uniswap v4 hook — both directions, capped in code, no override.
+              $PONES is launched on pons, which charges the trading tax and
+              permanently locks the liquidity pool. {feePct}% of every trade is
+              routed to the protocol treasury as ETH — on the bonding curve and
+              in the graduated Uniswap v4 pool alike.
             </p>
           </div>
           <div className="ix-how-card">
@@ -400,7 +407,7 @@ export default function Landing() {
             <div className="ix-how-n">03</div>
             <h3>Stocks become yours</h3>
             <p>
-              Hold {threshold}+ $PENNY at the snapshot, pass the one-time
+              Hold {threshold}+ $PONES at the snapshot, pass the one-time
               eligibility check, sign once to opt in — then rewards just show
               up, every epoch. No claiming. No gas. Opt out anytime.
             </p>
@@ -414,10 +421,10 @@ export default function Landing() {
             <div className="ix-life-row">
               <span className="ix-life-n">1</span>
               <div>
-                <strong>Someone trades.</strong> A swap in the ETH/$PENNY pool
-                fires the fee hook: {feePct}% of the WETH leg goes straight to
-                the FeeCollector. Nothing is skimmed — the fee address is wired
-                once and can never be changed.
+                <strong>Someone trades.</strong> pons charges the {feePct}%
+                creator tax and credits it to the protocol's payout wallet. The
+                team forwards those proceeds to the public FeeCollector address
+                — every deposit is an onchain event anyone can audit.
               </div>
             </div>
             <div className="ix-life-row">
@@ -443,7 +450,7 @@ export default function Landing() {
               <div>
                 <strong>A snapshot decides who&apos;s in.</strong> The indexer
                 reads every wallet&apos;s balance at a finalized block. Hold{" "}
-                {threshold}+ $PENNY there and you&apos;re in the epoch,
+                {threshold}+ $PONES there and you&apos;re in the epoch,
                 pro-rata to your balance. Sell after the snapshot? That
                 epoch&apos;s entitlement is still yours.
               </div>
@@ -498,10 +505,12 @@ export default function Landing() {
         </div>
         <div className="ix-trust-row">
           <div className="ix-trust">
-            <h3>No admin games</h3>
+            <h3>Verifiable, not trust-me</h3>
             <p>
-              Custody routes wire once and can never be redirected — even by
-              owners. The fee can never exceed {feePct}%.
+              Fees are forwarded by the team to a public deposit address — that
+              leg is a commitment you can audit onchain, not an invariant. Once
+              deposited, funds can only ever buy approved Stock Tokens and reach
+              holders: no withdrawal path exists, for anyone.
             </p>
           </div>
           <div className="ix-trust">
@@ -539,7 +548,7 @@ export default function Landing() {
       <footer className="ix-foot">
         <p>
           Informational only; not financial, legal, tax, or investment advice.
-          $PENNY is not redeemable for the basket and does not represent
+          $PONES is not redeemable for the basket and does not represent
           ownership of Stock Tokens or underlying shares. Distributions are
           tokenised instruments providing economic exposure — not brokerage
           shares — and do not include voting rights or dividends. Rewards

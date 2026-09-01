@@ -145,6 +145,38 @@ contract tests + all TS suites green after the fixes; slither re-run clean of ne
   routable stocks (USAR/RKLB/RGTI), production PENNY stays 5. Fork rehearsal green: 3-leg
   equal-notional purchase ($24.73/leg), atomic rollback on missing route.
 
+## 2026-09-02 — architecture pivot: pons-launched token, manual fee forwarding (D039)
+
+- **D039 — The token is launched on pons v2; we deploy only the buy-and-distribute rail.**
+  Owner decision. pons v2 mints the fixed supply straight to a bonding curve (no team
+  pre-allocation), charges the trading tax (traders pay 5%, creator tax 4% is ours, configurable
+  up to 10%), and graduates into a Uniswap v4 pool whose liquidity is **permanently locked**.
+  Correction of an earlier error: I had probed the stale v1 factory (0xA5aAb…1feB, single launch
+  config, no tax field) and wrongly concluded pons could not do custom tax. The live create page
+  runs v2, which can. Screenshot evidence beat my contract probe; the v1 `TokenLaunched` topic
+  returning zero recent events should have flagged the docs as stale.
+
+  DELETED (pons provides them): `PennyToken`, `PennyAllocator`, `TeamVesting`, `PennyFeeHook`,
+  `PennyFeeHookFactory`, `BaseHooks`, the v4 pool/LP-lock deploy path, and their tests.
+  KEPT (unchanged, fork-proven): `FeeCollector` → `BasketBuyer` + `ChainlinkOracle` +
+  `OracleGuard` + `RouteAdapter` → `RewardVault` → `RewardDistributor` (+ `EligibilityRegistry`,
+  `RebalanceController`). `DeployRail.s.sol` replaces the token/hook deploy script.
+
+  `FeeCollector` now accepts native ETH (`receive`/`depositFees`, auto-wrapped to WETH, with a
+  `lifetimeEthReceived` transparency counter) because the operator forwards pons creator-tax
+  proceeds manually rather than a hook streaming them.
+
+- **D040 — Honest trust boundary: fee forwarding is a commitment, not an invariant.** Under the
+  hook model, "100% of fees buy stocks" was physically enforced. Under the pons model the leg
+  from pons payout wallet → FeeCollector is performed by the operator, so it is an auditable
+  promise, not code. Everything AFTER the deposit remains trustless: no withdrawal path exists
+  on the collector, funds can only reach the set-once BasketBuyer, purchases are oracle-floored
+  and limited to governance-approved Stock Tokens, and rewards land in a vault no admin can
+  sweep. Website copy updated accordingly: the "custody routes can never be redirected" claim
+  was replaced with "Verifiable, not trust-me", stating plainly that the forwarding leg is a
+  team action and every deposit is a public onchain event. Marketing must never re-assert
+  hook-level enforcement while this model is in use.
+
 ## Blocker-adjacent decisions (may be revisited)
 
 - **D018 — AI-assisted build is in progress but is NOT an audit.** Reports from tooling do not replace the external audit gate. "Audited" wording is never used in docs/UI until a named audit report is linked.

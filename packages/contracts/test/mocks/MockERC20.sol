@@ -54,4 +54,25 @@ contract MockERC20 {
         }
         emit Transfer(from, to, value);
     }
+
+    // --- WETH9 surface (test-only): lets FeeCollector wrap native ETH ---
+    event Deposit(address indexed dst, uint256 wad);
+    event Withdrawal(address indexed src, uint256 wad);
+
+    function deposit() external payable {
+        totalSupply += msg.value;
+        balanceOf[msg.sender] += msg.value;
+        emit Deposit(msg.sender, msg.value);
+        emit Transfer(address(0), msg.sender, msg.value);
+    }
+
+    function withdraw(uint256 wad) external {
+        require(balanceOf[msg.sender] >= wad, "WETH: insufficient");
+        balanceOf[msg.sender] -= wad;
+        totalSupply -= wad;
+        emit Withdrawal(msg.sender, wad);
+        emit Transfer(msg.sender, address(0), wad);
+        (bool ok,) = msg.sender.call{value: wad}("");
+        require(ok, "WETH: send failed");
+    }
 }

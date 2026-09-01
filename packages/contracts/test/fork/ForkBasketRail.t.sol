@@ -3,6 +3,7 @@ pragma solidity 0.8.26;
 
 import {Test} from "forge-std/Test.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IWETH9} from "../../src/interfaces/IWETH9.sol";
 import {ChainlinkOracle, IAggregatorV3} from "../../src/basket/ChainlinkOracle.sol";
 import {OracleGuard} from "../../src/basket/OracleGuard.sol";
 import {RouteAdapter} from "../../src/basket/RouteAdapter.sol";
@@ -87,7 +88,7 @@ contract ForkBasketRailTest is Test {
         vault.setRewardSource(address(buyer));
         buyer.setRewardVault(vault);
 
-        collector = new FeeCollector(address(this), IERC20(WETH));
+        collector = new FeeCollector(address(this), IWETH9(WETH));
         collector.setBasketBuyer(IBasketBuyer(address(buyer)));
 
         // fork-only fill counterparty holding real Stock Tokens at real oracle prices
